@@ -4,14 +4,26 @@ public class Scene {
     public int id;
     public List <PoligonalModel> models;
     public List <Flash> flashes;
-    public <T> T Method1(T  t){
-        return t;
+    public List <Camera> cameras;
+    public <T> T Method1(T  flash){
+        return flash;
     }
-    public <T> T Method2(T t, T t2){
-        return t;
+    public <T, E> T Method2(T flash, E camera){
+        return flash;
     }
-    public Scene(PoligonalModel models, Flash flashes){
-        this.models = (List<PoligonalModel>) models;
-        this.flashes = (List<Flash>) flashes;
+
+    public Scene(int id, List<PoligonalModel> models, List<Flash> flashes, List<Camera> cameras) throws Exception {
+        if (models.size() > 0){
+            this.models = models;
+        }else {
+            throw new  Exception("There must be one model at least");
+        }
+        this.id = id;
+        this.flashes = flashes;
+        if (cameras.size() > 0){
+            this.cameras = cameras;
+        }else {
+            throw new  Exception("There must be one camera at least");
+        }
     }
 }

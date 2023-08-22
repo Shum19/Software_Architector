@@ -1,8 +1,9 @@
 package Home_Task_1.ModelElements;
 
+import Home_Task_1.Staff.Point3D;
+
 import java.awt.*;
 import java.util.List;
-import javafx.geometry.Point3D;
 import java.util.ArrayList;
 
 public class Poligon {
