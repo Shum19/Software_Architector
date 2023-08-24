@@ -6,9 +6,4 @@ import Home_Task_3.SRP.Car;
  */
 public class TreeCycle extends Car {
     private int numberOfWheel = 3;
-
-    @Override
-    public int getNumberOfWheels() {
-        return this.numberOfWheel;
-    }
 }
