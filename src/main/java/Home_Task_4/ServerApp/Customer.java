@@ -11,7 +11,7 @@ public class Customer {
     private CashProvider cashProvider;
 
     public Customer() {
-        this.user = new User();
+        //this.user = new User();
         this.cashProvider = new CashProvider(this.user);
         this.ticketProvider = new TicketProvider();
     }

@@ -1,5 +1,7 @@
 package Home_Task_4.UserApp;
 
+import Home_Task_4.DataBases.UserDateBases;
+
 import java.util.Scanner;
 
 import static Home_Task_4.UserApp.Input.inputInteger;
@@ -8,6 +10,7 @@ import static Home_Task_4.UserApp.Input.inputString;
 public class UserApp {
     public static void main(String[] args) {
         boolean flag = true;
+
         while (flag){
             System.out.println("Choose option:" +
                                 "\n1. Log in" +
@@ -19,12 +22,15 @@ public class UserApp {
                     String inputLogin = inputString("Enter your Name");
                     // Оределить exeption InputMismatchException
                     int inputPass = inputInteger("Enter your password");
+                    UserDateBases userDateBases = new UserDateBases();
+                    userDateBases.print();
 
                 case "2":
                     String inputName = inputString("Enter your Name");
                     String inputSurname = inputString("Enter your Surname");
                     String inputCardNum = inputString("Enter your Card Number");
                     String inputPassword = inputString("Enter your Password");
+
             }
         }
     }
