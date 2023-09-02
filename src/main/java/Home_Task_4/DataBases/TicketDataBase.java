@@ -5,6 +5,7 @@ import Home_Task_4.ServerApp.Ticket;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class TicketDataBase {
     public static void main(String[] args) {
@@ -30,8 +31,8 @@ public class TicketDataBase {
         ticketList.add(ticket_1);
         ticketList.add(ticket_2);
         ticketList.add(ticket_3);
+        System.out.println(ticketList);
     }
-
 
 
 }

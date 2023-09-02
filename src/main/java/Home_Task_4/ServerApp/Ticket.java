@@ -50,13 +50,16 @@ public class Ticket {
     public void setValid(boolean valid) {
         isValid = valid;
     }
-    public void Ticket(long routeNum, double price, int place, LocalDateTime localDateTime, boolean isValid){
-        this.routeNumber = routeNum;
-        this.price = price;
-        this.place = place;
-        this.dateTime = localDateTime;
-        this.isValid = isValid;
 
-
+    @Override
+    public String toString(){
+        String ticket = "Route Number-" + this.routeNumber
+                        + " Price-" + this.price + " Place-" + this.place
+                        + " Date and Local Time:" + this.dateTime;
+        if (this.isValid == true){
+            return ticket + " Available";
+        }
+        else
+            return ticket + " Not Available";
     }
 }
