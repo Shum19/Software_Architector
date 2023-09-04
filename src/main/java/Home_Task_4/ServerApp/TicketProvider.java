@@ -1,5 +1,6 @@
 package Home_Task_4.ServerApp;
 
+import Home_Task_4.DataBases.TicketDataBase;
 import Home_Task_4.ServerApp.Ticket;
 
 import java.time.LocalDateTime;
@@ -8,26 +9,26 @@ import java.util.List;
 
 public class TicketProvider {
     private List <Ticket> ticketList;
+    private TicketDataBase ticketDataBase = new TicketDataBase();
     public TicketProvider(){
-        this.ticketList = getTicketList();
+        this.ticketList = ticketDataBase.getTicketList();
     }
 
     // Метод для получиня списка билетов из базы данных
-    private List<Ticket> getTicketList(){
-        return this.ticketList = new ArrayList<>();
+    public List<Ticket> getTicketList(){
+        return this.ticketList;
     }
-    public Ticket getTicket (long routeNum, LocalDateTime localDateTime){
-        getTicketList();
-        for (int i = 0; i < ticketList.size(); i++){
-            Ticket ticket = ticketList.get(i);
-            if (ticket.getRouteNumber() == routeNum && ticket.getDateTime() == localDateTime){
-                return ticket;
+    public Ticket getTicket (long routeNum, int place, LocalDateTime localDateTime){
+        for (int i = 0; i < this.ticketList.size(); i++){
+            if (this.ticketList.get(i).equals(routeNum, place, localDateTime)){
+                return this.ticketList.get(i);
             }
         }
         return null;
     }
     public void updateTicketList(Ticket ticket){
-        this.ticketList.remove(getTicket(ticket.getRouteNumber(), ticket.getDateTime()));
+        this.ticketDataBase.updateTicketDatabaseList(ticket);
+        this.ticketList = this.ticketDataBase.getTicketList();
     }
 
 

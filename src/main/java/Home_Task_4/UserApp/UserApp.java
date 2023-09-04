@@ -3,14 +3,13 @@ package Home_Task_4.UserApp;
 import Home_Task_4.DataBases.UserDateBases;
 import Home_Task_4.ServerApp.Customer;
 import Home_Task_4.ServerApp.User;
-
-import java.util.Scanner;
-
+import java.time.LocalDateTime;
 import static Home_Task_4.UserApp.Input.*;
 
 public class UserApp {
     public static void main(String[] args) {
         boolean flag = true;
+        boolean flagCase_1 = true;
         UserDateBases userDateBases = new UserDateBases();
         while (flag){
             System.out.println("Choose option:" +
@@ -18,18 +17,41 @@ public class UserApp {
                                 "\n2. Register" +
                                 "\n3. Exit");
             String input = inputString("\nEnter Option");
-            switch (input){
+            switch (input) {
                 case "1":
                     String inputLogin = inputString("Enter your Name");
-                    // Оределить exeption InputMismatchException
                     int inputPass = inputInteger("Enter your password");
                     User user = userDateBases.login(inputLogin, inputPass);
                     if (user == null){
                         System.out.println("Wrong name or password. Try again");
                         break;
+                    }else {
+                        Customer customer = new Customer(user);
+                        System.out.println("You are logged in" + "\nHello Dear " + customer.getUser().getName() +
+                                            " " + customer.getUser().getSurname());
+                        while (flagCase_1){
+
+                            System.out.println("Choose option" +
+                                                "\n1. Show all Available Tickets" +
+                                                "\n2. Buy Ticket" +
+                                                "\n3. Log out");
+                            String inputCase_1 = inputString("Enter option");
+                            switch (inputCase_1){
+                                case "1":
+                                    customer.showAvailbleTickets();
+                                    break;
+                                case "2":
+                                    long routeNumber = inputLong("Select route");
+                                    int place = inputInteger("Select Place");
+                                    LocalDateTime localDateTime = inputLocalDateTime();
+                                    customer.byuTicket(routeNumber, place, localDateTime);
+                                    break;
+                                case "3":
+                                    flagCase_1 = false;
+                            }
+                        }
                     }
-                    System.out.println("You are logged in");
-                    Customer customer = new Customer(user);
+                    flagCase_1 = true;
                     break;
                 case "2":
                     String inputName = inputString("Enter your Name");
@@ -38,7 +60,6 @@ public class UserApp {
                     int inputPassword = inputInteger("Enter your Password");
                     User newUser = new User(inputName, inputSurname, inputCardNum,inputPassword);
                     userDateBases.addUser(newUser);
-                    userDateBases.print();
                     break;
                 case "3":
                     flag = false;

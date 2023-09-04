@@ -26,9 +26,9 @@ public class CashProvider {
     }
 
     // Метод обнавляет баланс после оплаты
-    private void updateBalance(double price){
+    private double updateBalance(double price){
         double curBalance = this.balance;
-        this.balance = curBalance - price;
+        return this.balance = curBalance - price;
     }
     // Метод проверяет баланс на банковском счете и если средств хватает то будет проиизведена оплата
     private boolean checkBalance(double price){
@@ -50,9 +50,10 @@ public class CashProvider {
 
     public void payment(double price){
         if (checkBalance(price)){
-            updateBalance(price);
+            this.cashProviderDataBase.setBalance(this.bankUser, updateBalance(price));
             System.out.println("Your payment is done");
-        }
+        }else
+            System.out.println("Payment canceled. Check your balance");
     }
 
 }

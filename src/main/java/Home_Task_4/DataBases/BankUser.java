@@ -31,6 +31,10 @@ public class BankUser {
         return cardNumber;
     }
 
+    public void setBalance(double balance) {
+        this.balance = balance;
+    }
+
     public boolean equals(User user){
         if (this.name.equals(user.getName()) && this.surname.equals(user.getSurname()) &&
                 this.cardNumber == user.getCardNumber()){

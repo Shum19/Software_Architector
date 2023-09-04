@@ -30,14 +30,20 @@ public class CashProviderDataBase {
         return this.userList;
     }
     public double getBalance(User user){
-        for (int i = 0; i < this.getUserList().size(); i++) {
-            if (this.getUserList().get(i).equals(user)){
+        for (int i = 0; i < this.userList.size(); i++) {
+            if (this.userList.get(i).equals(user)){
                 return this.userList.get(i).getBalance();
             }
         }
         return -1;
     }
-    public void setBalance (){}
+    public void setBalance (BankUser bankUser, double newBalance){
+        for (int i = 0; i < this.userList.size(); i++) {
+            if (this.userList.get(i).equals(bankUser)){
+                this.userList.get(i).setBalance(newBalance);
+            }
+        }
+    }
     public BankUser getBankUser(User user){
         for (int i = 0; i < this.userList.size(); i++) {
             if (this.userList.get(i).equals(user)){

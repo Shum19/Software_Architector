@@ -1,6 +1,7 @@
 package Home_Task_4.ServerApp;
 
 import java.time.LocalDateTime;
+import java.time.chrono.Chronology;
 
 public class Ticket {
     private long routeNumber;
@@ -62,12 +63,32 @@ public class Ticket {
     @Override
     public String toString(){
         String ticket = "Route Number-" + this.routeNumber
-                        + " Price-" + this.price + " Place-" + this.place
-                        + " Date and Local Time:" + this.dateTime;
+                        + "; Price-" + this.price + "; Place-" + this.place
+                        + "; Date and Local Time:" + this.dateTime;
         if (this.isValid == true){
-            return ticket + " Available";
+            return ticket + "; Available";
         }
         else
-            return ticket + " Not Available";
+            return ticket + "; Not Available";
+    }
+
+    public boolean equals(long routeNumber, int place, LocalDateTime localDateTime){
+        int orginDate = this.dateTime.getYear() + this.dateTime.getMonthValue() + this.dateTime.getDayOfMonth() +
+                        this.dateTime.getHour() + this.dateTime.getMinute();
+        int otherDate = localDateTime.getYear() + localDateTime.getMonthValue() +
+                        localDateTime.getDayOfMonth() + localDateTime.getHour() + localDateTime.getMinute();
+        if (this.routeNumber == routeNumber && this.place == place && orginDate == otherDate){
+            return true;
+        }
+        return false;
+    }
+    public boolean equals (Ticket ticket){
+        long routeNumber = ticket.getRouteNumber();
+        int place = ticket.getPlace();
+        LocalDateTime localDateTime = ticket.getDateTime();
+        if (equals(routeNumber, place, localDateTime)){
+            return true;
+        }
+        return false;
     }
 }
