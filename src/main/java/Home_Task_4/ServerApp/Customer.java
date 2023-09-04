@@ -10,8 +10,8 @@ public class Customer {
     private TicketProvider ticketProvider;
     private CashProvider cashProvider;
 
-    public Customer() {
-        //this.user = new User();
+    public Customer(User user) {
+        this.user = user;
         this.cashProvider = new CashProvider(this.user);
         this.ticketProvider = new TicketProvider();
     }

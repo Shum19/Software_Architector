@@ -16,4 +16,10 @@ public class Input {
         int integer = input.nextInt();
         return integer;
     }
+    public static long inputLong(String msg){
+        Scanner input = new Scanner(System.in);
+        System.out.println(msg);
+        long longg = input.nextLong();
+        return longg;
+    }
 }

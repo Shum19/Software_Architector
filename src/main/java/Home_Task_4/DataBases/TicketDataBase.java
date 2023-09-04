@@ -1,20 +1,17 @@
 package Home_Task_4.DataBases;
 
 import Home_Task_4.ServerApp.Ticket;
-
 import java.time.LocalDateTime;
-import java.time.Month;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
-public class TicketDataBase {
+public class TicketDataBase{
     private List<Ticket> ticketList;
-    public void addTicket(Ticket ticket){
+    private void addTicket(Ticket ticket){
         this.ticketList.add(ticket);
     }
     public List<Ticket> getTicketList(){
-        return defaultTickeetList();
+        return this.ticketList;
     }
 
     private List<Ticket> defaultTickeetList(){

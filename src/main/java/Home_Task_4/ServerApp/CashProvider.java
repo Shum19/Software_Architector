@@ -1,5 +1,8 @@
 package Home_Task_4.ServerApp;
 
+import Home_Task_4.DataBases.BankUser;
+import Home_Task_4.DataBases.CashProviderDataBase;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,44 +11,36 @@ public class CashProvider {
     private String surname;
     private long cardNumber;
     private double balance;
-    private List<CashProvider> cashProviderList = new ArrayList<>();// список базы данных в банке
+    private BankUser bankUser;
+    private CashProviderDataBase cashProviderDataBase = new CashProviderDataBase();// список базы данных в банке
 
     public CashProvider(User user){
-        String name = user.getName();
-        String surname = user.getSurname();
-        long cardNum = user.getCardNumber();
-        if (authorization(name, surname, cardNum)){
-            this.name = name;
-            this.surname = surname;
-            this.cardNumber = cardNum;
-            this.balance = getBalance();
+        if (authorization(user)){
+            this.bankUser = cashProviderDataBase.getBankUser(user);
+            this.name = this.bankUser.getName();
+            this.surname = this.bankUser.getSurname();
+            this.cardNumber = this.bankUser.getCardNumber();
+            this.balance = this.bankUser.getBalance();
         }else
             System.out.println("Not Authorized");
     }
 
-
-
-    // Метод используеться для получения баланса на банковском счете
-    private double getBalance(){
-        return this.balance;
-    }
     // Метод обнавляет баланс после оплаты
     private void updateBalance(double price){
-        double curBalance = getBalance();
+        double curBalance = this.balance;
         this.balance = curBalance - price;
     }
     // Метод проверяет баланс на банковском счете и если средств хватает то будет проиизведена оплата
     private boolean checkBalance(double price){
-        double currentBalance = getBalance();
+        double currentBalance = this.balance;
         if (currentBalance > price)
             return true;
         else
             return false;
     }
-    private boolean authorization(String name, String surname, long cardNumber){
-        for (int i = 0; i < cashProviderList.size(); i++) {
-            CashProvider cashProvider = cashProviderList.get(i);
-            if (cashProvider.name == name && cashProvider.surname == surname && cashProvider.cardNumber == cardNumber){
+    private boolean authorization(User user){
+        for (int i = 0; i < cashProviderDataBase.getUserList().size(); i++) {
+            if (cashProviderDataBase.getUserList().get(i).equals(user)){
                 return true;
             }
         }
