@@ -30,6 +30,9 @@ public class TicketProvider {
         this.ticketDataBase.updateTicketDatabaseList(ticket);
         this.ticketList = this.ticketDataBase.getTicketList();
     }
+    public void setTicketList(List<Ticket> newTicketList){
+        this.ticketList = newTicketList;
+    }
 
 
 }

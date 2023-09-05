@@ -48,6 +48,9 @@ public class Customer {
             }
         }
     }
+    public List<Ticket> getTickets(){
+        return this.ticketProvider.getTicketList();
+    }
 
     private boolean checkPriceOfInput(Ticket ticket, double price){
         if (price == ticket.getPrice()) return true;
@@ -62,5 +65,8 @@ public class Customer {
             double price_2 = inputDouble("Enter price of Ticket");
             return price_2;
         }
+    }
+    public void setTicketsList(List <Ticket> newTicketsList){
+        this.ticketProvider.setTicketList(newTicketsList);
     }
 }

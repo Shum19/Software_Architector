@@ -4,6 +4,7 @@ import Home_Task_4.ServerApp.Ticket;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.TimerTask;
 
 public class TicketDataBase{
     private List<Ticket> ticketList;
@@ -43,6 +44,9 @@ public class TicketDataBase{
                 this.ticketList.get(i).setValid(false);
             }
         }
+    }
+    public void setTicketList(List<Ticket> ticketList){
+        this.ticketList = ticketList;
     }
 
 }

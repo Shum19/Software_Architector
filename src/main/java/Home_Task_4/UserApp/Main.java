@@ -10,6 +10,10 @@ import static Home_Task_4.UserApp.Input.inputString;
 
 public class Main {
     public static void main(String[] args) {
-        int input = inputInteger("Enter");
+
+        String str = inputString("Eneter");
+        str = str.replace(".", "");
+
+        System.out.println(str.replace(' ', '_'));
     }
 }

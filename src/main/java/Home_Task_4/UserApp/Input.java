@@ -8,7 +8,7 @@ public class Input {
     public static String inputString(String msg){
         Scanner input = new Scanner(System.in);
         System.out.println(msg);
-        String text = input.next();
+        String text = input.nextLine();
         return text;
     }
     public static int inputInteger(String msg) {
