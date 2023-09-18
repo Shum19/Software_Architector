@@ -1,0 +1,215 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Аренда сервера",
+    "version": "0.0.1"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8080/api/v1",
+      "description": "Local Server"
+    }
+  ],
+  "paths": {
+    "/clouds": {
+      "get": {
+        "summary": "Получение списка всех доступных серверов",
+        "tags": [
+          "Clouds"
+        ],
+        "operationId": "getAllClouds",
+        "responses": {
+          "200": {
+            "description": "Успешный ответ со спсиском",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Clouds"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "500": {
+            "description": "Internal server Error"
+          }
+        }
+      },
+      "post": {
+        "summary": "Заказ сервера",
+        "tags": [
+          "Clouds"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Clouds"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Успешный ответ со спсиском",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Clouds"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "500": {
+            "description": "Internal server Error"
+          }
+        }
+      }
+    },
+    "/client/login": {
+      "get": {
+        "summary": "Авторизация",
+        "tags": [
+          "Client"
+        ],
+        "operationId": "loginClient",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "description": "Электрронная почта Клиента",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Password",
+            "in": "query",
+            "description": "Пароль клиента от аккаунта",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Успешный ответ со спсиском",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Client"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "500": {
+            "description": "Internal server Error"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Cloud": {
+        "type": "object",
+        "required": [
+          "CPU",
+          "RAM",
+          "OS",
+          "Storage",
+          "id_client"
+        ],
+        "properties": {
+          "CPU": {
+            "type": "integer",
+            "example": 8,
+            "description": "Количество ядер"
+          },
+          "RAM": {
+            "type": "integer",
+            "example": 256,
+            "description": "Размер Оперативной памяти"
+          },
+          "OS": {
+            "type": "string",
+            "enum": [
+              "Windows",
+              "Linux"
+            ],
+            "example": "Linux",
+            "description": "Операционная Система"
+          },
+          "Storage": {
+            "type": "integer",
+            "example": 20,
+            "description": "Размер дискового пространства"
+          },
+          "id_client": {
+            "type": "integer",
+            "example": 2,
+            "description": "ID клиента"
+          }
+        }
+      },
+      "Clouds": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/Cloud"
+        }
+      },
+      "Error": {
+        "type": "object",
+        "required": [
+          "error_code",
+          "error_message"
+        ],
+        "properties": {
+          "error_code": {
+            "type": "integer"
+          },
+          "error_message": {
+            "type": "string"
+          }
+        }
+      },
+      "Client": {
+        "type": "object",
+        "required": [
+          "Name",
+          "Surname",
+          "email",
+          "Hashpassword"
+        ],
+        "properties": {
+          "Name": {
+            "type": "string",
+            "example": "Mark"
+          },
+          "Surname": {
+            "type": "string",
+            "example": "Kolin"
+          },
+          "email": {
+            "type": "string",
+            "example": "mark_kolin@yahoo.com"
+          },
+          "Hashpassword": {
+            "type": "integer",
+            "example": 12378473923
+          }
+        }
+      }
+    }
+  }
+}
