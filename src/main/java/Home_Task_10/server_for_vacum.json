@@ -1,0 +1,242 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Сервер устройств уборки дома",
+    "description": "сервер для роботоризированных устройств",
+    "version": "0.0.1"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8080/api/v1",
+      "description": "Локалный сервер"
+    }
+  ],
+  "paths": {
+    "/Devices": {
+      "get": {
+        "summary": "Получения списка всех зарегистрированных устройств",
+        "tags": [
+          "Devices"
+        ],
+        "operationId": "getAllDevices",
+        "responses": {
+          "200": {
+            "description": "Успешный ответ со спсиском",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Devices"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "500": {
+            "description": "Internal server Error"
+          }
+        }
+      },
+      "post": {
+        "summary": "Добавление нового устройства",
+        "tags": [
+          "Devices"
+        ],
+        "operationId": "addNewDevice",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Devices"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Устройство добавлено успешно",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Devices"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "500": {
+            "description": "Internal server Error"
+          }
+        }
+      }
+    },
+    "/Devices/{Id}": {
+      "delete": {
+        "summary": "Удаление устройства",
+        "tags": [
+          "Devices"
+        ],
+        "operationId": "deleteDevice",
+        "parameters": [
+          {
+            "name": "Id",
+            "in": "path",
+            "description": "Удаление устройства по Id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Удаление устройства успешно",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Devices"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "500": {
+            "description": "Internal server Error"
+          }
+        }
+      }
+    },
+    "/User/Login": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "description": "Авторизация пользователя",
+        "operationId": "logIn",
+        "parameters": [
+          {
+            "name": "Login",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "password",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Успеешный вход",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "500": {
+            "description": "Internal server Error"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Device": {
+        "type": "object",
+        "required": [
+          "Id",
+          "Name",
+          "Model",
+          "Factory_number",
+          "Status",
+          "Version",
+          "IP_address"
+        ],
+        "properties": {
+          "Id": {
+            "type": "integer",
+            "example": 1
+          },
+          "Name": {
+            "type": "string",
+            "example": "Пылесос",
+            "description": "Отображает имя устройства такие как пылесос, моющий пылесос"
+          },
+          "Model": {
+            "type": "string",
+            "example": "Супер Классный Российский производитель",
+            "description": "Отбражает модель устройства"
+          },
+          "Factory_number": {
+            "type": "string",
+            "example": "1234qwer",
+            "description": "Серийный номер"
+          },
+          "Status": {
+            "type": "boolean",
+            "example": "свободен",
+            "description": "Статус устройства"
+          },
+          "Version": {
+            "type": "integer",
+            "example": "1.0.1",
+            "description": "Версия ПО на устройстве"
+          },
+          "IP_address": {
+            "type": "string",
+            "example": "010.010.010.010"
+          }
+        }
+      },
+      "Devices": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/Device"
+        }
+      },
+      "User": {
+        "type": "object",
+        "required": [
+          "Login",
+          "Email",
+          "HashPassword"
+        ],
+        "properties": {
+          "Login": {
+            "type": "string",
+            "example": "Mark Kolin",
+            "description": "Логин пользователя"
+          },
+          "Email": {
+            "type": "string",
+            "example": "mk@yahoo.com",
+            "description": "Электронная почта пользователя"
+          },
+          "HashPassword": {
+            "type": "integer",
+            "example": 123456
+          }
+        }
+      }
+    }
+  }
+}
