@@ -139,7 +139,54 @@
         ],
         "responses": {
           "200": {
-            "description": "Успеешный вход",
+            "description": "Успешный вход",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "500": {
+            "description": "Internal server Error"
+          }
+        }
+      }
+    },
+    "/User": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "description": "Регистарация пользователя",
+        "operationId": "addUsser",
+        "requestBody": {
+          "description": "Ввод данных для регистрации",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "confirmation_for_password",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Успешная регистррация",
             "content": {
               "application/json": {
                 "schema": {
@@ -234,6 +281,35 @@
           "HashPassword": {
             "type": "integer",
             "example": 123456
+          }
+        }
+      },
+      "Users": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/User"
+        }
+      },
+      "Schedule": {
+        "type": "object",
+        "required": [
+          "Id",
+          "Device_id",
+          "Date_Time"
+        ],
+        "properties": {
+          "Id": {
+            "type": "integer"
+          },
+          "Device_id": {
+            "type": "integer",
+            "description": "ID устрройства в списке устройств пользователя"
+          },
+          "Date_Time": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Дата и время уборки",
+            "example": "01.01.2024 T 15:00"
           }
         }
       }
