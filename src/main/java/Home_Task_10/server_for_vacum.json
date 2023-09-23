@@ -203,6 +203,143 @@
           }
         }
       }
+    },
+    "/User/{deleteByEmail}": {
+      "delete": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Удаление пользователя по электронной почте",
+        "parameters": [
+          {
+            "name": "Email",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Успешное удаление пользователя",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "500": {
+            "description": "Internal server Error"
+          }
+        }
+      }
+    },
+    "/Schedules": {
+      "get": {
+        "tags": [
+          "Schedules"
+        ],
+        "summary": "Получения списка графиков уборки",
+        "operationId": "getAllSchedules",
+        "responses": {
+          "200": {
+            "description": "Успешное получения списка гррафиков уборки",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Schedules"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "500": {
+            "description": "Internal server Error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Schedules"
+        ],
+        "summary": "Добавление даты и времени уборки",
+        "operationId": "addSchedule",
+        "parameters": [
+          {
+            "name": "date_time",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date-time",
+              "example": "01.01.2024 T 15:00"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Успшеное добавление распиисание уборки",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Schedules"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "500": {
+            "description": "Internal server Error"
+          }
+        }
+      }
+    },
+    "/Schedules/{deleteById}": {
+      "delete": {
+        "tags": [
+          "Schedules"
+        ],
+        "summary": "Удаление расписания уборки",
+        "operationId": "deleteSchedule",
+        "parameters": [
+          {
+            "name": "deleteById",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Расписаник удалено",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "integer"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "500": {
+            "description": "Internal server Error"
+          }
+        }
+      }
     }
   },
   "components": {
@@ -311,6 +448,12 @@
             "description": "Дата и время уборки",
             "example": "01.01.2024 T 15:00"
           }
+        }
+      },
+      "Schedules": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/Schedule"
         }
       }
     }
